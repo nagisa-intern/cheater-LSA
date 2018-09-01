@@ -34,7 +34,7 @@ for lines in tqdm(file_df['summary']):
 #file_df['wakati'] = wakati_list
 #file_df.to_csv("detail_wakati.csv")
 
-with open("keitaiso.csv", "w", newline="") as f:
+with open("../keitaiso.csv", "w", newline="") as f:
 
     # 「delimiter」に区切り文字、「quotechar」に囲い文字を指定します
     writer = csv.writer(f, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
