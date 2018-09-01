@@ -36,7 +36,6 @@ for lines in tqdm(file_df['summary']):
 
 with open("../keitaiso.csv", "w", newline="") as f:
 
-    # 「delimiter」に区切り文字、「quotechar」に囲い文字を指定します
     writer = csv.writer(f, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
     writer.writerow(["id", "wakati"])
