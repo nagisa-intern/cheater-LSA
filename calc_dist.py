@@ -61,3 +61,7 @@ def calc_word_dist(conn, model):
      json_result[i+1] = { "id" :result[i][1]}
 	
   return json_result
+
+def calc_page_time(conn, rank):
+  print(rank[1]['id'])
+  return 0
