@@ -63,5 +63,16 @@ def calc_word_dist(conn, model):
   return json_result
 
 def calc_page_time(conn, rank):
-  print(rank[1]['id'])
+  #print(rank[1]['id'])
+  cur = conn.cursor()
+  cur.execute('select pageid, words, time from users where time>0 && id=%d')
+ 
+  data = cur.fetchall()
+  print(data[0])
+
+  
+
   return 0
+
+
+
