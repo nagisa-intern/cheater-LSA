@@ -10,8 +10,8 @@ from calc_dist import calc_page_time
 
 model  =  gensim.models.KeyedVectors.load_word2vec_format('../model.vec', binary=False)
 
-#url = urlparse('mysql://comic_user:nagisac2018@localhost:3306/comicdb')
-url = urlparse('mysql://bb72568e1ffe6c:9c7cce5f@us-cdbr-iron-east-01.cleardb.net:3306/heroku_5a61d935653267e')
+url = urlparse('mysql://comic_user:nagisac2018@localhost:3306/comicdb')
+#url = urlparse('mysql://bb72568e1ffe6c:9c7cce5f@us-cdbr-iron-east-01.cleardb.net:3306/heroku_5a61d935653267e')
 
 conn = mysql.connector.connect(
     host = url.hostname,
@@ -30,9 +30,10 @@ api = Flask(__name__)
 def get():
     ans = calc_word_dist(conn, model)
     #print(ans)    
-    calc_page_time(conn, ans)
-    result = ans
-    return make_response(jsonify(result))
+    result = calc_page_time(conn, ans)
+    return make_response(jsonify(rank=result))
+    #result = ans
+    #return make_response(jsonify(result))
 
 # エラーハンドリング
 @api.errorhandler(404)

@@ -59,20 +59,35 @@ def calc_word_dist(conn, model):
   json_result = {}
   for i in range(len(result)):
      json_result[i+1] = { "id" :result[i][1]}
-	
+
   return json_result
 
 def calc_page_time(conn, rank):
   #print(rank[1]['id'])
   cur = conn.cursor()
-  cur.execute('select pageid, words, time from users where time>0 && id=%d')
+  cur.execute('select id,moji,comic,time from page where time > 0.0 and ( comic=%d or comic=%d or comic=%d or comic=%d or comic=%d )' % (rank[1]['id'], rank[2]['id'], rank[3]['id'], rank[4]['id'], rank[5]['id'] ) )
  
-  data = cur.fetchall()
-  print(data[0])
+  data = cur.fetchall() 
+  ans = [ [0 for i in range(3)] for j in range(len(data))]
+  #print(ans)
+  for i in range(len(data)):
+    ave = data[i][1] / data[i][2]
+    ans[i][0] = ave
+    ans[i][1] = data[i][0]
+    ans[i][2] = data[i][2]
+  ans.sort()  
+  #print(ans)
 
-  
+  result = [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+  #print("   ")
+  #print(len(ans))
+  for c in range(14):
+   #print(c) 
+   #print(ans[c][1])
+   result[c] = ans[c][1]
 
-  return 0
+  #print(result)
+  return result
 
 
 
